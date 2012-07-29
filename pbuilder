@@ -10,7 +10,13 @@ if [ "$(dpkg-architecture -qDEB_HOST_GNU_TYPE)" != "arm-linux-gnueabihf" ]; then
 fi
 
 # Set the pbuilder work directory
-PBUILDER_DIR=${PBUILDER_DIR-pbuilder}
+PBUILDER_DIR=${PBUILDER_DIR-work}
+
+# Create the directory tree
+mkdir -p ${PBUILDER_DIR}
+mkdir -p ${PBUILDER_DIR}/result
+mkdir -p ${PBUILDER_DIR}/aptcache
+mkdir -p ${PBUILDER_DIR}/build
 
 # Unset DEBOOTSTRAPOPTS to avoid default values
 echo "unset DEBOOTSTRAPOPTS" > $PBUILDER_DIR/pbuilderrc
