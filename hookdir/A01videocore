@@ -1,0 +1,8 @@
+#!/bin/bash
+# Install VideCore stuff if needed
+if [ ! -d /opt/vc ]; then
+    apt-get install -y "${APTGETOPT[@]}" git
+    git clone --depth 1 git://github.com/raspberrypi/firmware.git /tmp/rpi-firmware
+    mkdir -p /opt/
+    cp -R /tmp/rpi-firmware/hardfp/opt/vc /opt/
+fi

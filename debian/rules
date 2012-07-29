@@ -1,0 +1,120 @@
+#!/usr/bin/make -f
+
+# Configure script options for cross-compilation
+DEB_HOST_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+# Debug options if needed
+ifneq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+    DEBUG_OPTIONS = --enable-debug --disable-optimizations
+else
+    DEBUG_OPTIONS = --disable-debug --enable-optimizations
+endif
+
+# Set correct environment variables
+ENV_OPTIONS  = CFLAGS="$(DEB_CFLAGS) -Wno-psabi -I/opt/vc/include -I/opt/vc/include/interface/vcos/pthreads"
+ENV_OPTIONS += CXXFLAGS="$(DEB_CXXFLAGS) -Wno-psabi -I/opt/vc/include -I/opt/vc/include/interface/vcos/pthreads"
+ENV_OPTIONS += LDFLAGS="$(DEB_LDFLAGS) -L/opt/vc/lib"
+
+# Configure script options
+XBMC_CONFIG_OPTIONS ?= --host=$(DEB_HOST_GNU_TYPE) \
+  --build=$(DEB_BUILD_GNU_TYPE) \
+  --prefix=/usr \
+  --docdir=/usr/share/doc/xbmc \
+  --with-platform=raspberry-pi \
+  $(DEBUG_OPTIONS) \
+  --disable-gl \
+  --enable-gles \
+  --disable-x11 \
+  --disable-sdl \
+  --enable-ccache \
+  --enable-external-libraries \
+  --disable-goom \
+  --disable-hal \
+  --disable-pulse \
+  --disable-vaapi \
+  --disable-vdpau \
+  --disable-xrandr \
+  --disable-airplay \
+  --disable-alsa \
+  --enable-avahi \
+  --disable-libbluray \
+  --disable-dvdcss \
+  --disable-joystick \
+  --enable-mid \
+  --enable-nfs \
+  --disable-profiling \
+  --disable-projectm \
+  --enable-rsxs \
+  --enable-rtmp \
+  --disable-vaapi \
+  --disable-vdadecoder \
+  --disable-external-ffmpeg \
+  --disable-optical-drive \
+  $(ENV_OPTIONS)
+
+# Use --parallel option only if debhelper supports it
+DH_PARALLEL_OPT=$(shell dh_testdir --parallel 2>/dev/null && echo "--parallel")
+
+# Wildcard target
+%:
+	dh $@ $(DH_PARALLEL_OPT)
+
+# Other targets
+override_dh_clean:
+	dh_clean libtool xbmc/config.h xbmc/stamp-h1
+	find . -name config.status -o -name config.cache -o -name config.log \
+		-exec rm -f "{}" \;
+
+override_dh_auto_configure:
+	./bootstrap
+	./configure $(XBMC_CONFIG_OPTIONS)
+
+override_dh_auto_install:
+	$(MAKE) -C lib/addons/script.module.pil
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+	$(MAKE) eventclients DESTDIR=$(CURDIR)/debian/tmp \
+		WII_EXTRA_OPTS=-DCWIID_OLD
+
+override_dh_install:
+	dh_install --sourcedir=$(CURDIR)/debian/tmp -XLICENCE \
+		-XLicence.txt -XLicense.txt -XLiberationSans-Regular.ttf \
+		-XDejaVuSans.ttf -XDejaVuSans-Bold.ttf -XLICENSE.txt
+
+override_dh_makeshlibs:
+	# We don't install shared libraries in standard locations so don't run
+	# dh_makeshlibs
+
+override_dh_shlibdeps: debian/tmp/xbmc-rbp-bin-depends-dummy.so debian/tmp/xbmc-rbp-bin-recommends-dummy.so
+	dh_shlibdeps -a -O--parallel \
+		-l$(CURDIR)/debian/xbmc-rbp-bin/usr/lib/xbmc/system/players/dvdplayer
+	# Need to manually add dependencies for dlopened libs.
+	dpkg-shlibdeps -pdlopenlibs -edebian/tmp/xbmc-rbp-bin-depends-dummy.so -xlibc6 -O >> debian/xbmc-rbp-bin.substvars
+	dpkg-shlibdeps -dRecommends -edebian/tmp/xbmc-rbp-bin-recommends-dummy.so -xlibc6 -O >> debian/xbmc-rbp-bin.substvars
+
+debian/tmp/xbmc-rbp-bin-depends-dummy.so:
+	mkdir -p debian/tmp
+	cc -xc -shared -Wl,--no-as-needed -o $@ /dev/null \
+		-lcurl-gnutls
+
+debian/tmp/xbmc-rbp-bin-recommends-dummy.so:
+	mkdir -p debian/tmp
+	cc -xc -shared -Wl,--no-as-needed -o $@ /dev/null \
+		-lass \
+		-lbluray \
+		-lcec \
+		-lFLAC \
+		-lmad \
+		-lmodplug \
+		-lmp3lame \
+		-lmpeg2 \
+		-lnfs \
+		-logg \
+		-lplist \
+		-lrtmp \
+		-lshairport \
+		-lvdpau \
+		-lvorbis \
+		-lvorbisenc \
+		-lvorbisfile

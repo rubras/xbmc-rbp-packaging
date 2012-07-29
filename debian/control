@@ -1,0 +1,398 @@
+Source: xbmc-rbp
+Section: video
+Priority: optional
+Maintainer: Antoine Bertin <diaoulael@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~),
+ autoconf,
+ ccache,
+ gawk,
+ gperf,
+ mesa-utils,
+ zip,
+ unzip,
+ autotools-dev,
+ comerr-dev,
+ dpkg-dev,
+ libalsaplayer-dev,
+ libapt-pkg-dev,
+ libasound2-dev,
+ libass-dev,
+ libatk1.0-dev,
+ libavahi-client-dev,
+ libavahi-common-dev,
+ libavcodec-dev,
+ libavformat-dev,
+ libavutil-dev,
+ libbison-dev,
+ libbluray-dev,
+ libboost1.50-dev,
+ libbz2-dev,
+ libc-dev-bin,
+ libc6-dev,
+ libcaca-dev,
+ libcairo2-dev,
+ libcdio-dev,
+ libclalsadrv-dev,
+ libcrypto++-dev,
+ libcups2-dev,
+ libcurl3-gnutls-dev,
+ libdbus-1-dev,
+ libdbus-glib-1-dev,
+ libdirectfb-dev,
+ libdrm-dev,
+ libelf-dev,
+ libenca-dev,
+ libept-dev,
+ libevent-dev,
+ libexpat1-dev,
+ libflac-dev,
+ libfontconfig1-dev,
+ libfreetype6-dev,
+ libfribidi-dev,
+ libgconf2-dev,
+ libgcrypt11-dev,
+ libgdk-pixbuf2.0-dev,
+ libglew-dev,
+ libglewmx-dev,
+ libglib2.0-dev,
+ libglu1-mesa-dev,
+ libgnome-keyring-dev,
+ libgnutls-dev,
+ libgpg-error-dev,
+ libgtk2.0-dev,
+ libhal-dev,
+ libhunspell-dev,
+ libice-dev,
+ libicu-dev,
+ libidn11-dev,
+ libiso9660-dev,
+ libjasper-dev,
+ libjbig-dev,
+ libjconv-dev,
+ libjpeg8-dev,
+ libkrb5-dev,
+ libldap2-dev,
+ libltdl-dev,
+ liblzo2-dev,
+ libmad0-dev,
+ libmicrohttpd-dev,
+ libmodplug-dev,
+ libmp3lame-dev,
+ libmpeg2-4-dev,
+ libmysqlclient-dev,
+ libncurses5-dev,
+ libnspr4-dev,
+ libnss3-dev,
+ libogg-dev,
+ libopenal-dev,
+ libp11-kit-dev,
+ libpam0g-dev,
+ libpango1.0-dev,
+ libpcre++-dev,
+ libpcre3-dev,
+ libpixman-1-dev,
+ libpng12-dev,
+ libprotobuf-dev,
+ libpthread-stubs0-dev,
+ libpulse-dev,
+ librtmp-dev,
+ libsamplerate0-dev,
+ libsdl-image1.2-dev,
+ libsdl1.2-dev,
+ libslang2-dev,
+ libsm-dev,
+ libsmbclient-dev,
+ libspeex-dev,
+ libsqlite3-dev,
+ libssh-dev,
+ libssh2-1-dev,
+ libssl-dev,
+ libstdc++6-4.6-dev,
+ libtagcoll2-dev,
+ libtasn1-3-dev,
+ libtiff4-dev,
+ libtinfo-dev,
+ libtinyxml-dev,
+ libts-dev,
+ libudev-dev,
+ libv8-dev,
+ libva-dev,
+ libvdpau-dev,
+ libvorbis-dev,
+ libvpx-dev,
+ libwebp-dev,
+ libwibble-dev,
+ libx11-dev,
+ libx11-xcb-dev,
+ libxapian-dev,
+ libxau-dev,
+ libxcb-glx0-dev,
+ libxcb-render0-dev,
+ libxcb-shm0-dev,
+ libxcb1-dev,
+ libxcomposite-dev,
+ libxcursor-dev,
+ libxdamage-dev,
+ libxdmcp-dev,
+ libxext-dev,
+ libxfixes-dev,
+ libxft-dev,
+ libxi-dev,
+ libxinerama-dev,
+ libxml2-dev,
+ libxmu-dev,
+ libxrandr-dev,
+ libxrender-dev,
+ libxslt1-dev,
+ libxss-dev,
+ libxt-dev,
+ libxtst-dev,
+ libxxf86vm-dev,
+ libyajl-dev,
+ libzip-dev,
+ linux-libc-dev,
+ lzma-dev,
+ mesa-common-dev,
+ python-dev,
+ python2.7-dev,
+ x11proto-composite-dev,
+ x11proto-core-dev,
+ x11proto-damage-dev,
+ x11proto-dri2-dev,
+ x11proto-fixes-dev,
+ x11proto-gl-dev,
+ x11proto-input-dev,
+ x11proto-kb-dev,
+ x11proto-randr-dev,
+ x11proto-record-dev,
+ x11proto-render-dev,
+ x11proto-scrnsaver-dev,
+ x11proto-xext-dev,
+ x11proto-xf86vidmode-dev,
+ x11proto-xinerama-dev,
+ xtrans-dev,
+ zlib1g-dev,
+ libnfs-dev
+Standards-Version: 3.9.3
+Homepage: http://xbmc.org/
+Vcs-Git: git://github.com/Diaoul/xbmc-rbp-packaging.git
+Vcs-Browser: https://github.com/Diaoul/xbmc-rbp-packaging
+
+Package: xbmc-rbp
+Architecture: all
+Depends: xbmc-rbp-bin (>= ${source:Version}),
+         xbmc-rbp-bin (<< ${source:Version}.1~),
+         mesa-utils,
+         x11-utils,
+         ttf-liberation,
+         ttf-dejavu-core,
+         python-imaging,
+         ${python:Depends},
+         ${misc:Depends}
+Recommends: python-qt3
+Provides: xbmc-rbp-standalone, xbmc-rbp-data, xbmc-rbp-skin-confluence, xbmc-rbp-live
+Replaces: xbmc-rbp-standalone, xbmc-rbp-data, xbmc-rbp-skin-confluence, xbmc-rbp-live
+Breaks: xbmc-rbp-standalone (<< 2:11.0~git20111222.22ad8e4),
+        xbmc-rbp-data (<< 2:11.0~git20111222.22ad8e4),
+        xbmc-rbp-skin-confluence (<< 2:11.0~git20111222.22ad8e4)
+Description: XBMC Media Center (arch-independent data package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This package contains all the archiecture independent data needed to have a
+ working XBMC.
+
+Package: xbmc-rbp-bin
+Architecture: armhf
+Depends: ${shlibs:Depends},
+         ${dlopenlibs:Depends},
+         ${misc:Depends}
+Recommends: ${shlibs:Recommends}
+Provides: xbmc-rbp-common
+Replaces: xbmc-rbp-common
+Conflicts: xbmc-rbp-common
+Description: XBMC Media Center (binary data package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This package contains all the binary data needed to have a working XBMC.
+
+Package: xbmc-rbp-eventclients-common
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}
+Description: XBMC Media Center (Event Client Common package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This package is the common package for XBMC Event Client.
+
+Package: xbmc-rbp-eventclients-dev
+Architecture: all
+Section: libdevel
+Depends: xbmc-rbp-eventclients-common (= ${binary:Version}),
+         ${misc:Depends}
+Description: XBMC Media Center (Event Client Dev package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This is the Development package for XBMC Event Client.
+
+Package: xbmc-rbp-eventclients-wiiremote
+Architecture: armhf
+Depends: xbmc-rbp-eventclients-common (= ${source:Version}),
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: XBMC Media Center (Event Client WII Remote support package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This package is the Wii Remote client package for XBMC.
+
+Package: xbmc-rbp-eventclients-j2me
+Architecture: all
+Depends: xbmc-rbp-eventclients-common (= ${binary:Version}),
+         ${python:Depends},
+         python-bluez | python-lightblue,
+         ${misc:Depends}
+Description: XBMC Media Center (Event Client J2ME package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This package is the J2ME package for XBMC Event Client. This is meant to
+ provide a server that communicate with a mobile tool supporting Java ME.
+
+Package: xbmc-rbp-eventclients-ps3
+Architecture: all
+Depends: xbmc-rbp-eventclients-common (= ${binary:Version}),
+         python-bluez | python-lightblue,
+         ${python:Depends},
+         ${misc:Depends}
+Description: XBMC Media Center (Event Client PS3 package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This package is the PS3 package for XBMC Event Client.
+
+Package: xbmc-rbp-eventclients-xbmc-send
+Architecture: all
+Depends: xbmc-rbp-eventclients-common (= ${binary:Version}),
+         ${python:Depends},
+         ${misc:Depends}
+Description: XBMC Media Center (Event Client XBMC-SEND package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This package is the XBMC-SEND package for XBMC Event Client.
+

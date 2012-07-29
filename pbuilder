@@ -1,0 +1,32 @@
+#!/bin/sh
+#TODO:
+#wget http://archive.raspbian.org/raspbian.public.key -O - | sudo apt-key add -
+
+
+# Use qemu-debootstrap if cross-compiling
+DEBOOTSTRAP=debootstrap
+if [ "$(dpkg-architecture -qDEB_HOST_GNU_TYPE)" != "arm-linux-gnueabihf" ]; then
+    DEBOOTSTRAP=qemu-debootstrap
+fi
+
+# Set the pbuilder work directory
+PBUILDER_DIR=${PBUILDER_DIR-pbuilder}
+
+# Unset DEBOOTSTRAPOPTS to avoid default values
+echo "unset DEBOOTSTRAPOPTS" > $PBUILDER_DIR/pbuilderrc
+
+# Run pbuilder
+pbuilder $1 \
+    --distribution wheezy \
+    --architecture armhf \
+    --debootstrap $DEBOOTSTRAP \
+    --configfile $PBUILDER_DIR/pbuilderrc \
+    --mirror http://archive.raspbian.org/raspbian \
+    --basetgz $PBUILDER_DIR/base.tgz \
+    --buildresult $PBUILDER_DIR/result \
+    --aptcache $PBUILDER_DIR/aptcache \
+    --buildplace $PBUILDER_DIR/build \
+    --components "main contrib non-free rpi" \
+    --hookdir hookdir \
+    $2
+

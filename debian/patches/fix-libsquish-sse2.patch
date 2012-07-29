@@ -1,0 +1,12 @@
+Remove unsupported sse2 in libsquish
+--- a/lib/libsquish/Makefile.in
++++ b/lib/libsquish/Makefile.in
+@@ -34,7 +34,7 @@
+ ifeq ($(findstring osx,$(ARCH)),osx)
+ 	g++ $(NATIVE_ARCH) -DSQUISH_USE_SSE=2 -msse2 -I. $(SRCS) -dynamiclib -install_name `pwd`/libsquish-native.so -o $@
+ else
+-	g++ -DSQUISH_USE_SSE=2 -msse2 -I. $(SRCS) -shared -fPIC -Wl,-soname,`pwd`/libsquish-native.so -o $@
++	g++ -I. $(SRCS) -shared -fPIC -Wl,-soname,`pwd`/libsquish-native.so -o $@
+ endif
+ endif
+ 
