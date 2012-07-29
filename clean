@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -fr xbmc-rbp-*
+rm -fr xbmc-rbp_*
