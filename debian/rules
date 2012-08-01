@@ -103,7 +103,6 @@ debian/tmp/xbmc-rbp-bin-recommends-dummy.so:
 	cc -xc -shared -Wl,--no-as-needed -o $@ /dev/null \
 		-lass \
 		-lbluray \
-		-lcec \
 		-lFLAC \
 		-lmad \
 		-lmodplug \
@@ -111,9 +110,7 @@ debian/tmp/xbmc-rbp-bin-recommends-dummy.so:
 		-lmpeg2 \
 		-lnfs \
 		-logg \
-		-lplist \
 		-lrtmp \
-		-lshairport \
 		-lvdpau \
 		-lvorbis \
 		-lvorbisenc \
