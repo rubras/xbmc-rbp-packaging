@@ -1,4 +1,3 @@
-Remove unsupported sse2 in libsquish
 --- a/lib/libsquish/Makefile.in
 +++ b/lib/libsquish/Makefile.in
 @@ -34,7 +34,7 @@
