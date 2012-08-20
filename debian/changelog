@@ -1,5 +1,5 @@
-xbmc-rbp (12.0-alpha4~git20120728.365953f-1) unstable; urgency=low
+xbmc-rbp (12.0-alpha5~git20120804.efef226-1) unstable; urgency=low
 
   * Initial release
 
- -- Antoine Bertin <diaoulael@gmail.com>  Sat, 28 Jul 2012 23:45:07 +0200
+ -- Antoine Bertin <diaoulael@gmail.com>  Mon, 20 Aug 2012 10:12:02 +0200
