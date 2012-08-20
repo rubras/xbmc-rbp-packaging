@@ -64,7 +64,7 @@ Installation
 
 6. Create a dedicated user (or edit one of your choice) with the following groups: xbmc, tty, audio, video, plugdev and input::
 
-    sudo useradd xbmc -g xbmc -G tty,audio,video,plugdev,input
+    sudo useradd xbmc -m -U -G tty,audio,video,plugdev,input
 
 7. Reboot so everything is reloaded correctly::
 
