@@ -23,9 +23,12 @@ XBMC_CONFIG_OPTIONS ?= --host=$(DEB_HOST_GNU_TYPE) \
   --prefix=/usr \
   --docdir=/usr/share/doc/xbmc \
   --with-platform=raspberry-pi \
+  use_texturepacker_native=no \
+  --enable-player=omxplayer \
   $(DEBUG_OPTIONS) \
   --disable-gl \
   --enable-gles \
+  --disable-openmax \
   --disable-x11 \
   --disable-sdl \
   --enable-ccache \
@@ -50,6 +53,9 @@ XBMC_CONFIG_OPTIONS ?= --host=$(DEB_HOST_GNU_TYPE) \
   --enable-rtmp \
   --disable-vaapi \
   --disable-vdadecoder \
+  --disable-crystalhd \
+  --disable-vtbdecoder \
+  --enable-libcec \
   --disable-external-ffmpeg \
   --disable-optical-drive \
   $(ENV_OPTIONS)

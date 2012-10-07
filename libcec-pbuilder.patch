@@ -1,0 +1,31 @@
+--- debian/control.old	2012-10-07 00:48:37.000000000 +0200
++++ debian/control	2012-10-07 00:46:34.000000000 +0200
+@@ -2,10 +2,13 @@
+ Section: libs
+ Priority: optional
+ Maintainer: Lars Op den Kamp <lars.opdenkamp@pulse-eight.com>
+-Build-Depends: debhelper (>= 7),
++Build-Depends: autoconf,
++ automake,
++ debhelper (>= 7),
++ dh-autoreconf,
+  pkg-config,
+- libudev-dev,
+- liblockdev1-dev
++ liblockdev1-dev,
++ libtool,
++ libudev-dev
+ Standards-Version: 3.8.4
+ Homepage: http://libcec.pulse-eight.com/
+ Vcs-Git: git://anonscm.debian.org/collab-maint/libcec.git
+--- debian/rules.old	2012-10-07 10:56:01.000000000 +0200
++++ debian/rules	2012-10-07 10:55:57.000000000 +0200
+@@ -4,5 +4,7 @@
+ #export DH_VERBOSE=1
+ 
+ %:
+-	dh  $@ --parallel
++	dh  $@ --parallel --with autoreconf
+ 
++override_dh_auto_configure:
++	dh_auto_configure -- --enable-rpi --with-rpi-include-path="/opt/vc/include" --with-rpi-lib-path="/opt/vc/lib"

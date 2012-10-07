@@ -5,7 +5,7 @@ Requirements
 ------------
 To make debian packages, there are some requirements::
 
-    sudo apt-get install pdebuild
+    sudo apt-get install pdebuild dh-autoreconf
 
 You'll also need to register the raspbian repository public key with apt::
 
@@ -22,15 +22,19 @@ Usage
 
 2. Create the source package::
 
-    ./source
+    make source
 
 3. Create the base chroot for pbuilder::
 
-    ./pbuilder create
+    make create
 
-4. Build xbmc-rbp::
+4. Build dependencies::
 
-    sudo ./pbuilder build *.dsc
+    make dependencies
+
+5. Build xbmc-rbp::
+
+    make build
 
 Installation
 ------------

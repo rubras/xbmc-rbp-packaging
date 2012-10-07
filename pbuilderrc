@@ -1,0 +1,11 @@
+# Configuration
+ARCHITECTURE="armhf"
+DISTRIBUTION="wheezy"
+HOOKDIR="hookdir"
+COMPONENTS="main contrib non-free rpi"
+EXTRAPACKAGES="apt-utils"
+OTHERMIRROR="deb file:///var/cache/pbuilder/result ./"
+BINDMOUNTS="/var/cache/pbuilder/result"
+MIRRORSITE="http://archive.raspbian.org/raspbian"
+DEB_BUILD_OPTIONS="nocheck"
+unset DEBOOTSTRAPOPTS
