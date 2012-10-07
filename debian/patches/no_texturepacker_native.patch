@@ -1,0 +1,10 @@
+--- a/configure.in
++++ b/configure.in
+@@ -665,7 +665,6 @@
+      target_platform=target_raspberry_pi
+      use_neon=no
+      use_texturepacker=yes
+-     use_texturepacker_native=yes
+      use_arch="arm"
+      use_cpu=arm1176jzf-s
+      use_hardcoded_tables="yes"
