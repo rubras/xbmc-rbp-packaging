@@ -1,5 +1,5 @@
 DEBOOTSTRAP?=qemu-debootstrap
-DEB_BUILD_OPTIONS=nocheck parallel=4
+DEB_BUILD_OPTIONS=nocheck
 
 setup: 
 	wget http://archive.raspbian.org/raspbian.public.key -O - | sudo apt-key add -
