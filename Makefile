@@ -22,6 +22,8 @@ dependencies:
 	pbuilder --build --configfile pbuilderrc --debootstrap $(DEBOOTSTRAP) $@/libcec_1.9.1-1.dsc
 	
 create:
+	mkdir -p /var/cache/pbuilder/result
+	cd /var/cache/pbuilder/result && apt-ftparchive packages . > Packages
 	pbuilder --create --configfile pbuilderrc --debootstrap $(DEBOOTSTRAP)
 
 update:
