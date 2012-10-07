@@ -1,6 +1,6 @@
 --- debian/control.old	2012-10-07 00:48:37.000000000 +0200
 +++ debian/control	2012-10-07 00:46:34.000000000 +0200
-@@ -2,10 +2,13 @@
+@@ -2,10 +2,14 @@
  Section: libs
  Priority: optional
  Maintainer: Lars Op den Kamp <lars.opdenkamp@pulse-eight.com>
