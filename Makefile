@@ -1,4 +1,4 @@
-DEBOOTSTRAP?=qemu-debootstrap
+DEBOOTSTRAP=debootstrap
 DEB_BUILD_OPTIONS=nocheck
 
 setup: 
@@ -17,10 +17,10 @@ dependencies:
 	cd $@ && apt-get source taglib=1.8-1
 	pbuilder --build --configfile pbuilderrc --debootstrap $(DEBOOTSTRAP) $@/taglib_1.8-1.dsc
 	cd $@ && git clone git://github.com/Pulse-Eight/libcec.git libcec
-	cd $@/libcec && git checkout libcec-1.9.0
+	cd $@/libcec && git checkout libcec-2.0.0
 	patch -p0 -d $@/libcec < libcec-pbuilder.patch
 	cd $@/libcec && dpkg-buildpackage -rfakeroot -us -uc -S -sa -d
-	pbuilder --build --configfile pbuilderrc --debootstrap $(DEBOOTSTRAP) $@/libcec_1.9.1-1.dsc
+	pbuilder --build --configfile pbuilderrc --debootstrap $(DEBOOTSTRAP) $@/libcec_2.0.1-1.dsc
 	
 create:
 	mkdir -p /var/cache/pbuilder/result
