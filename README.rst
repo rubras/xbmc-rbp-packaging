@@ -10,6 +10,12 @@ Install a few packages aswell::
 
     sudo apt-get install pbuilder dh-autoreconf git
 
+And update `/etc/apt/sources.list` to add the following::
+
+    deb-src http://mirrordirector.raspbian.org/raspbian/ wheezy main contrib non-free rpi
+    deb-src http://ftp.fr.debian.org/debian/ sid main contrib non-free
+    deb-src http://ftp.fr.debian.org/debian/ experimental main contrib non-free
+
 
 Usage
 -----
