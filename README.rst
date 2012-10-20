@@ -3,15 +3,13 @@ XBMC packaging for the Raspberry Pi
 
 Requirements
 ------------
-To make debian packages, there are some requirements::
+To make debian packages you will need a maximum of memory so use the 240MB
+memory split and create yourself a 512MB swap.
 
-    sudo apt-get install pdebuild dh-autoreconf
+Install a few packages aswell::
 
-You'll also need to register the raspbian repository public key with apt::
+    sudo apt-get install pbuilder dh-autoreconf git
 
-    wget http://archive.raspbian.org/raspbian.public.key -O - | sudo apt-key add -
-
-TBC
 
 Usage
 -----
@@ -24,9 +22,9 @@ Usage
 
     make source
 
-3. Create the base chroot for pbuilder::
+3. Create the base chroot for pbuilder on first run or update it::
 
-    make create
+    make create|update
 
 4. Build dependencies::
 
@@ -38,24 +36,23 @@ Usage
 
 Installation
 ------------
-1. Copy generated .deb files to your RPi (from the computer)::
+1. Install::
 
-    scp work/result/*.deb pi@xxx.xxx.xxx.xxx:/home/pi
+    sudo dpkg -i /var/cache/pbuilder/result/*.deb
 
-2. Install (from the RPi)::
-
-    sudo dpkg -i *.deb
-
-3. Fix dependencies::
+2. Fix dependencies::
 
     sudo apt-get install -f
 
-4. Create a udev rule for /dev/tty0 to fix keyboard for simple users (non-root)::
+
+Running as non-root
+-------------------
+1. Create a udev rule for /dev/tty0 to fix keyboard::
 
     sudo nano /etc/udev/rules.d/98-tty.rules
     KERNEL=="tty[0-9]*", GROUP="tty", MODE="0660"
 
-5. Allow power actions from the power menu of XBMC for the xmbc group (or the group of your choice)::
+2. Allow power actions from the power menu of XBMC for the xmbc group (or the group of your choice)::
 
     sudo groupadd xbmc
     sudo nano /var/lib/polkit-1/localauthority/50-local.d/xbmc.pkla
@@ -66,14 +63,14 @@ Installation
     ResultInactive=yes
     ResultActive=yes
 
-6. Create a dedicated user (or edit one of your choice) with the following groups: xbmc, tty, audio, video, plugdev and input::
+3. Create a dedicated user (or edit one of your choice) with the following groups: xbmc, tty, audio, video, plugdev and input::
 
     sudo useradd xbmc -m -U -G tty,audio,video,plugdev,input
 
-7. Reboot so everything is reloaded correctly::
+4. Reboot so everything is reloaded correctly::
 
     sudo reboot
 
-8. Now the xbmc user can run::
+5. Now the xbmc user can run::
 
     xbmc
